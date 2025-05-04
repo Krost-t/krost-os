@@ -1,80 +1,110 @@
-# Krost-os  🖥️📱
+# Krost-OS 🖥️
 
-Welcome to **krost-os**, my immersive **web application** that emulates the aesthetics and user experience of **macOS** (Aqua) and **iPadOS/iOS** (responsive with touch gestures). Each icon in the Dock or Launchpad opens a web "window" showcasing one of my development projects or skills.
+> **Krost-OS** is a Unix-like operating system developed **from scratch** in **C** and **x86 assembly**, featuring a basic graphical interface, PS/2 keyboard and mouse support, and an interactive terminal.
 
----
-
-## 🔍 Overview
-
-![Screenshot of krost-os](path/to/screenshot.png)
-
-🔗 **Live Demo:** [krost-os.app](https://your-domain.com)
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen) ![License](https://img.shields.io/badge/license-AGPL%20v3.0-blue)
 
 ---
 
-## ✨ Features
+## Presentation 📖
 
-- **🧭 Interactive Dock:** A bottom screen bar with hoverable and clickable icons, replicating the macOS effect.
-- **🪟 Translucent Windows:** Utilises `backdrop-filter` to simulate Aqua-style blurs.
-- **📱 Responsive Launchpad:** A grid of icons adaptable to touch screens (drag & drop, swipe).
-- **🎞️ Smooth Animations:** Transitions crafted with Framer Motion.
-- **♿ Accessibility:** Keyboard navigation, ARIA roles, and focus management.
-- **🛠️ Technologies:** React, Tailwind CSS v4.1, Framer Motion, CSS Modules.&#8203;:contentReference[oaicite:0]{index=0}
+Krost-OS is an academic and personal project aiming to rebuild an operating system from the ground up, without network connectivity, inspired by Unix architecture and running in a virtual environment (QEMU/VM).
 
 ---
 
-## ⚙️ Installation & Start-up
+## Features ✨
 
-1. **Clone the repository:**
+* **Bootloader & Kernel**: Start via GRUB Multiboot, transition from assembly bootloader to a monolithic C kernel.
+* **Memory Management**: Static allocation, paging, and protection in protected mode.
+* **I/O Drivers**: PS/2 keyboard & mouse, VGA text (80×25) and graphics mode (320×200, 256 colors), FAT12-like disk access.
+* **Interactive Terminal**: A simple shell implementing commands (`ls`, `cat`, `echo`, `help`) with basic redirections.
+* **Basic GUI**: Simple window rectangles, focus management, and a status bar.
+* **Cooperative Multitasking**: A scheduler for context switching between user processes.
 
-   ```bash
-   git clone https://github.com/your-username/krost-os.git
-   ```
+---
 
-2. **Navigate to the directory :**
-
-   ```bash
-   cd krost-os
-   ```
-
-3. **Install dependencies :**
-
-   ```bash
-   npm install
-   ```
-
-4. **Start the development server :**
-
-   ```bash
-   npm run dev
-   ```
-
-## 🧭 Usage
-
-1. Open your browser at `http://localhost:3000`.
-2. Click or tap the Dock/Launchpad icons to open presentation windows.
-3. On mobile/tablet, test touch gestures (_swipe_, _drag & drop_)  for navigation.
-
-## 🗂️ Project Structure
+## Architecture 🏗️
 
 ```bash
 krost-os/
-├─ public/            # Static assets (images, favicon)
-├─ src/
-│  ├─ components/     # UI: Window, Dock, Launchpad, IconGrid
-│  ├─ pages/          # Content: Projects, About, Contact
-│  ├─ styles/         # Variables, themes, Tailwind utilities
-│  └─ App.jsx         # React entry point + routes
-├─ tailwind.config.js # Tailwind CSS configuration
-└─ README.md          # Project documentation
-
+├─ boot/          # Bootloader (assembly) + grub.cfg
+├─ kernel/        # C kernel: syscalls, scheduler, memory management
+├─ drivers/       # Keyboard, mouse, VGA, PIT, disk drivers
+├─ fs/            # FAT12-like filesystem implementation
+├─ shell/         # Shell and utility programs
+├─ Makefile       # Build targets: all, run, clean
+└─ README.md      # Project documentation
 ```
 
-## 🤝 Contributing
+---
 
-Contributions are welcome! Here's how to get involved :
+## Technologies Used 🛠️
 
-1. Fork this repository.
-2. Create a branch : `git checkout -b feature/ma-fonctionnalité`.
-3. Commit your changes : `git commit -m "Ajout de ma fonctionnalité"`.
-4. Push to your branch : `git push origin feature/ma-fonctionnalité`.
+* **Languages**: C (GNU GCC), x86 Assembly (NASM)
+* **Boot**: GRUB Multiboot protocol
+* **Virtualization**: QEMU/KVM
+* **Build System**: Make
+* **Debug**: GDB for kernel and user processes
+
+---
+
+## Installation & Execution ⚙️
+
+```bash
+# Clone the repository
+git clone https://github.com/Krost-t/krost-os.git
+cd krost-os
+
+# Build the project
+make all
+
+# Run Krost-OS in QEMU
+make run
+```
+
+> **Prerequisites**: `nasm`, `gcc`, `grub2`, `qemu-system-x86_64`, `make`.
+
+---
+
+## Usage 🚀
+
+1. **Boot**: QEMU automatically loads Krost-OS.
+2. **Terminal**: Use the `krost-shell> ` prompt to enter commands.
+3. **Graphics**: Press `F1` to switch to VGA graphics mode.
+4. **Mouse**: PS/2 emulation to move the cursor and click windows.
+
+---
+
+## Possible Improvements 🔧
+
+* **Preemptive multitasking** with priority scheduling and synchronization primitives (mutex, semaphore).
+* **Advanced filesystem** (ext2-like) with journaling support.
+* **Network drivers** for Ethernet or Wi-Fi connectivity.
+* **Enhanced GUI**: 2D rendering engine, font support, theming.
+* **Security features**: memory protection, ACLs, address space layout randomization (ASLR).
+
+---
+
+## Contribution 🤝
+
+Contributions and feedback are welcome!
+
+1. Fork the repository.
+2. Create a branch: `git checkout -b feature/your-feature`.
+3. Commit your changes: `git commit -m "Add <feature>"`.
+4. Push to your branch: `git push origin feature/your-feature`.
+5. Open a Pull Request.
+
+---
+
+## License 📜
+
+This project is licensed under the **GNU Affero General Public License v3.0**. See [LICENSE](LICENSE) for details.
+
+---
+
+## Contact 📫
+
+Christ Matsanga
+✉️ [christ.matsanganzoulou@gmail.com](mailto:christ.matsanganzoulou@gmail.com)
+🔗 [GitHub](https://github.com/Krost-t)
